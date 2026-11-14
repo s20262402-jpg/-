@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>تحميل تطبيق مدرسة رجب محمد محمود الثانوية (v1.0.0)</title>
+  <meta name="theme-color" content="#103b66">
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #d4af37;
+      --bg-dark: #0a0f1d;
+      --card-dark: #131c31;
+      --text-light: #f8fafc;
+      --text-muted: #94a3b8;
+      --border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+    body { background: var(--bg-dark); color: var(--text-light); min-height: 100vh; overflow-x: hidden; }
+
+    /* Background glow effects */
+    .bg-glow {
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: -1;
+      background: radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 40%),
+                  radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.1) 0%, transparent 40%);
+    }
+
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 6px 4%; background: rgba(19, 28, 49, 0.9);
+      backdrop-filter: blur(10px); border-bottom: 1px solid var(--border-color);
+      position: sticky; top: 0; z-index: 1000;
+    }
+
+    .brand { display: flex; align-items: center; gap: 8px; }
+    .brand-logo {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: linear-gradient(135deg, #103b66, #2563eb);
+      display: flex; align-items: center; justify-content: center;
+      border: 1.5px solid var(--accent); color: white; font-size: 0.85rem;
+    }
+    .brand h1 { font-size: 0.95rem; font-weight: 700; color: #fff; }
+    .brand span { font-size: 0.65rem; color: var(--text-muted); display: block; }
+
+    .hero {
+      display: flex; flex-direction: column; align-items: center; text-align: center;
+      padding: 60px 20px 40px; max-width: 900px; margin: 0 auto;
+    }
+    .badge-version {
+      background: rgba(37, 99, 235, 0.15); border: 1px solid rgba(37, 99, 235, 0.4);
+      color: #60a5fa; padding: 6px 16px; border-radius: 20px; font-size: 0.85rem;
+      font-weight: 600; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px;
+    }
+    .hero h2 { font-size: 2.5rem; font-weight: 900; margin-bottom: 16px; line-height: 1.3; }
+    .hero h2 span { color: #60a5fa; }
+    .hero p { font-size: 1.1rem; color: var(--text-muted); max-width: 650px; margin-bottom: 30px; }
+
+    .download-btns { display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-bottom: 40px; }
+    .btn-download {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white;
+      padding: 14px 32px; border-radius: 12px; font-weight: 700; text-decoration: none;
+      display: flex; align-items: center; gap: 10px; box-shadow: 0 10px 25px rgba(37, 99, 235, 0.4);
+      transition: 0.3s; border: 1px solid rgba(255,255,255,0.2);
+    }
+    .btn-download:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(37, 99, 235, 0.6); }
+
+    /* Features Grid */
+    .features-section { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+    .section-title { text-align: center; margin-bottom: 30px; font-size: 1.8rem; font-weight: 700; }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+    .feature-card {
+      background: var(--card-dark); border: 1px solid var(--border-color);
+      padding: 24px; border-radius: 16px; text-align: center; transition: 0.3s;
+    }
+    .feature-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+    .feature-icon {
+      width: 50px; height: 50px; background: rgba(37, 99, 235, 0.15); color: #60a5fa;
+      border-radius: 12px; display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; margin: 0 auto 16px;
+    }
+    .feature-card h3 { font-size: 1.1rem; margin-bottom: 8px; }
+    .feature-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+    /* Screenshots Gallery Section (6 Images, No Titles) */
+    .screenshots-section { max-width: 1100px; margin: 60px auto; padding: 0 20px; }
+    .screenshots-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;
+      justify-content: center;
+    }
+    .screenshot-card {
+      background: var(--card-dark); border: 1px solid var(--border-color);
+      border-radius: 20px; overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.3); transition: 0.3s;
+    }
+    .screenshot-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .screenshot-frame {
+      width: 100%; height: 420px; background: #000; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; position: relative;
+    }
+    .screenshot-frame img {
+      width: 100%; height: 100%; object-fit: cover; transition: 0.3s;
+    }
+    .screenshot-card:hover .screenshot-frame img { transform: scale(1.03); }
+
+    footer {
+      text-align: center; padding: 30px; background: var(--card-dark);
+      border-top: 1px solid var(--border-color); color: var(--text-muted);
+      font-size: 0.85rem; margin-top: 60px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-glow"></div>
+
+  <header>
+    <div class="brand">
+      <div class="brand-logo"><i class="fa-solid fa-graduation-cap"></i></div>
+      <div>
+        <h1>مدرسة رجب محمد محمود</h1>
+        <span>الموقع الرسمي لتحميل التطبيق</span>
+      </div>
+    </div>
+    <a href="Rajab_Secondary_School.apk" download class="btn-download" style="padding: 4px 10px; font-size: 0.75rem;">
+      <i class="fa-solid fa-download"></i> تحميل APK
+    </a>
+  </header>
+
+  <section class="hero">
+    <div class="badge-version">
+      <i class="fa-solid fa-circle-check" style="color: #4ade80;"></i> إصدار مستقر v1.0.0
+    </div>
+    <h2>تطبيق <span>مدرسة رجب محمد محمود الثانوية</span> بين أيديكم</h2>
+    <p>تابع جداول الحصص والامتحانات، شارك في التحديات والأسئلة اليومية، واعرف ترتيب المتفوقين ولوحة الشرف مباشرة من هاتفك المحمول.</p>
+    
+    <div class="download-btns">
+      <a href="Rajab_Secondary_School.apk" download class="btn-download">
+        <i class="fa-solid fa-download"></i> تحميل ملف الـ APK (مباشر)
+      </a>
+    </div>
+  </section>
+
+  <div class="features-section">
+    <h3 class="section-title">مميزات التطبيق</h3>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-bell"></i></div>
+        <h3>تنبيهات وإشعارات عاجلة</h3>
+        <p>تلقي أهم الإعلانات المدرسية والتنبيهات بشكل لحظي.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-calendar-days"></i></div>
+        <h3>جداول الحصص والامتحانات</h3>
+        <p>اختر صفك وفصلك الدراسي واعرف جداولك بكل سهولة.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-trophy"></i></div>
+        <h3>لوحة الشرف والمتفوقين</h3>
+        <p>نظام نقاط تفاعلي يبرز أسماء الطلاب المتفوقين في المدرسة.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon"><i class="fa-solid fa-circle-question"></i></div>
+        <h3>تحديات وأسئلة يومية</h3>
+        <p>أجب عن الأسئلة الاختيارية والمقالية واكسب النقاط.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- معرض صور التطبيق (6 صور بدون عناوين) -->
+  <section class="screenshots-section">
+    <h3 class="section-title">صور من داخل التطبيق</h3>
+    <p style="text-align: center; color: var(--text-muted); margin-bottom: 30px;">لقطات حية لواجهات التطبيق</p>
+    
+    <div class="screenshots-grid">
+      <!-- الصورة الأولى -->
+      <div class="screenshot-card">
+        <div class="screenshot-frame">
+          <img src="11.png" alt="صورة 1" onerror="this.src='https://via.placeholder.com/300x600/1e293b/ffffff?text=صورة+1'">
+        </div>
+      </div>
+
+      <!-- الصورة الثانية -->
+      <div class="screenshot-card">
+        <div class="screenshot-frame">
+          <img src="12.png" alt="صورة 2" onerror="this.src='https://via.placeholder.com/300x600/1e293b/ffffff?text=صورة+2'">
+        </div>
+      </div>
+
+      <!-- الصورة الثالثة -->
+      <div class="screenshot-card">
+        <div class="screenshot-frame">
+          <img src="13.png" alt="صورة 3" onerror="this.src='https://via.placeholder.com/300x600/1e293b/ffffff?text=صورة+3'">
+        </div>
+      </div>
+
+      <!-- الصورة الرابعة -->
+      <div class="screenshot-card">
+        <div class="screenshot-frame">
+          <img src="14.png" alt="صورة 4" onerror="this.src='https://via.placeholder.com/300x600/1e293b/ffffff?text=صورة+4'">
+        </div>
+      </div>
+
+      <!-- الصورة الخامسة -->
+      <div class="screenshot-card">
+        <div class="screenshot-frame">
+          <img src="15.png" alt="صورة 5" onerror="this.src='https://via.placeholder.com/300x600/1e293b/ffffff?text=صورة+5'">
+        </div>
+      </div>
+
+      <!-- الصورة السادسة -->
+      <div class="screenshot-card">
+        <div class="screenshot-frame">
+          <img src="16.png" alt="صورة 6" onerror="this.src='https://via.placeholder.com/300x600/1e293b/ffffff?text=صورة+6'">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>جميع الحقوق محفوظة © مدرسة رجب محمد محمود الثانوية | تطوير /حسام مصطفى عبدالرحمن</p>
+  </footer>
+
+</body>
+</html>
